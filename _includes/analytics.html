@@ -1,25 +1,40 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', '{{ site.google_analytics }}');
+    function gtag() {
 
-  gtag("consent", "default", {
-       ad_storage: "denied",
-       ad_user_data: "denied", 
-       ad_personalization: "denied",
-       analytics_storage: "denied",
-       functionality_storage: "denied",
-       personalization_storage: "denied",
-       security_storage: "granted",
-       wait_for_update: 2000,
-  });
+        dataLayer.push(arguments);
+
+    }
+
+    gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 2000,
+    });
+
+    gtag("set", "ads_data_redaction", true);
+    gtag("set", "url_passthrough", true);
+
 </script>
 
 
 <!-- Start cookieyes banner -->
 <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/ee70a9f0bd099aaa9d649357/script.js"></script>
 <!-- End cookieyes banner -->
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ site.google_analytics }}');
+</script>
