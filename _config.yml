@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: mlopt.xyz
-email: busul@gams.com
+email: h(DOT)burak(DOT)usul@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Bunch of stuff about ML, Optimization and their combination.
 baseurl: "" # the subpath of your site, e.g. /blog
