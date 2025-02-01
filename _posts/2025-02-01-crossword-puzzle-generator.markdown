@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Crossword Puzzle Generator"
-date:   2025-01-23 17:22:43 +0100
-categories: jekyll update
+date:   2025-02-01 18:41:00 +0100
+categories: optimization game
 ---
 
 While playing a mobile game a couple of months ago, an advertisement caught my
