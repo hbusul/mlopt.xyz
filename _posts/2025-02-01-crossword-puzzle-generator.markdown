@@ -95,76 +95,29 @@ $$
 $$
 
 Now, there comes the more complicated part. For the intersecting blocks, we need
-to pick words such that their intersecting letters are the same. Let
-\\(j_1, j_2\\) be two intersecting blocks, i.e.
-\\(\exists {i_1 \in I, i_2 \in I} : (j_1, j_2, i_1, i_2) \in common\\).
+to pick words such that their intersecting letters are the same.
 
-We need to write that, if \\(w_{j_1, k_1} = 1\\) and \\(w_{j_2, k_2} = 1\\),
-then
+*Necessity is the mother of invention.*
 
-$$
-\exists l \in L : wlet_{k_1, i_1, l} = wlet_{k_2, i_2, l} = 1
-$$
-
-We can make the statement a bit easier by:
+I had provided another formulation to ensure that intersections were
+correct. However, in the demo license there is a limitation for number of
+equations and variables. Since I want you to able to play with this example
+in the Streamlit, I changed the formulation to something more compact. It
+probably is much better this way anyway.
 
 $$
-wlet_{k_1, i_1, l} = wlet_{k_2, i_2, l} \quad \forall{l \in L}
+\sum_{\substack{k \in K : \\ wlet_{k, i_1, l}} = 1}{w_{j_1, k}} =
+\sum_{\substack{k \in K : \\ wlet_{k, i_2, l}} = 1}{w_{j_2, k}}
+\quad \forall{(j_1, j_2, i_1, i_2) \in common} ,\, \forall{l \in L}
 $$
 
-One way of writing conditional constraints by using a big-M method. Let's
-split the equality into two inequalities.
+This formulation says, for a given letter \\(l\\) and intersection
+\\((j_1, j_2, i_1, i_2) \in common\\), the number of words that we assigned to
+the \\(j_1\\)th block that uses the letter \\(l\\) in the \\(i_1\\)th place must be
+equal to number of words that we assigned to the \\(j_2\\)th block
+that uses letter \\(l\\) in the \\(i_2\\)th place. Simply, enforcing words are
+selected so that their intersecting letters are the same.
 
-$$
-wlet_{k_1, i_1, l} \leq wlet_{k_2, i_2, l} \quad \forall{l \in L}
-$$
-
-$$
-wlet_{k_1, i_1, l} \geq wlet_{k_2, i_2, l} \quad \forall{l \in L}
-$$
-
-Let's assume we have a condition, \\(cond_{j_1, j_2, k_1, k_2}\\), that is 0
-when \\(w_{j_1, k_1} = w_{j_2, k_2} = 1\\); Otherwise
-\\(cond_{j_1, j_2, k_1, k_2} \gt 0\\).
-
-$$
-wlet_{k_1, i_1, l} \leq wlet_{k_2, i_2, l} + M * cond_{j_1, j_2, k_1, k_2} \quad \forall{l \in L}
-$$
-
-$$
-wlet_{k_1, i_1, l} + M * cond_{j_1, j_2, k_1, k_2} \geq wlet_{k_2, i_2, l} \quad \forall{l \in L}
-$$
-
-So when the \\(cond \gt 0\\), two inequalities are satisfied anyway.
-We can write down the condition easily by:
-
-$$
-cond_{j_1, j_2, k_1, k_2} = 2 - w_{j_1, k_1} - w_{j_2, k_2}
-$$
-
-If we re-write the equations again:
-
-$$
-wlet_{k_1, i_1, l} \leq wlet_{k_2, i_2, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \quad \forall{l \in L}
-$$
-
-$$
-wlet_{k_1, i_1, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \geq wlet_{k_2, i_2, l} \quad \forall{l \in L}
-$$
-
-Instead of writing the equation just for a single \\(j_1, j_2, i_1, i_2\\),
-we can write it for all intersections and for all words.
-
-
-$$
-wlet_{k_1, i_1, l} \leq wlet_{k_2, i_2, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \quad \forall{l \in L}, \;
-\forall{(j_1, j_2, i_1, i_2) \in common}, \; \forall{k_1 \in K}, \; \forall{k_2 \in K}
-$$
-
-$$
-wlet_{k_1, i_1, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \geq wlet_{k_2, i_2, l} \quad \forall{l \in L}, \;
-\forall{(j_1, j_2, i_1, i_2) \in common}, \; \forall{k_1 \in K}, \; \forall{k_2 \in K}
-$$
 
 This an optimization model where we only seek for a feasible solution, so we do
 not need to define an objective.
@@ -193,14 +146,11 @@ $$ \sum_{k}{w_{j, k}} = 1 \quad \forall{j \in J} $$
 
 $$ \sum_{j}{w_{j, k}} \leq 1 \quad \forall{k \in K} $$
 
-$$
-wlet_{k_1, i_1, l} \leq wlet_{k_2, i_2, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \quad \forall{l \in L}, \;
-\forall{(j_1, j_2, i_1, i_2) \in common}, \; \forall{k_1 \in K}, \; \forall{k_2 \in K}
-$$
 
 $$
-wlet_{k_1, i_1, l} + M * (2 - w_{j_1, k_1} - w_{j_2, k_2}) \geq wlet_{k_2, i_2, l} \quad \forall{l \in L}, \;
-\forall{(j_1, j_2, i_1, i_2) \in common}, \; \forall{k_1 \in K}, \; \forall{k_2 \in K}
+\sum_{\substack{k \in K : \\ wlet_{k, i_1, l}} = 1}{w_{j_1, k}} =
+\sum_{\substack{k \in K : \\ wlet_{k, i_2, l}} = 1}{w_{j_2, k}}
+\quad \forall{(j_1, j_2, i_1, i_2) \in common} ,\, \forall{l \in L}
 $$
 
 Here is the same formulation in [GAMSPy](https://gamspy.readthedocs.io/en/latest/):
@@ -267,14 +217,13 @@ use_word_atmost_once[k] = gp.Sum(j, w[j, k]) <= 1
 big_M = 3
 
 # use common letters
-intersections_1 = gp.Equation(m, domain=[j, jj, i, ii, l, k, kk])
-intersections_1[j, jj, i, ii, l, k, kk].where[common[j, jj, i, ii]] = (
-    wlet[k, i, l] + (2 - w[j, k] - w[jj, kk]) * big_M >= wlet[kk, ii, l]
-)
 
-intersections_2 = gp.Equation(m, domain=[j, jj, i, ii, l, k, kk])
-intersections_2[j, jj, i, ii, l, k, kk].where[common[j, jj, i, ii]] = (
-    wlet[k, i, l] <= wlet[kk, ii, l] + (2 - w[j, k] - w[jj, kk]) * big_M
+intersections = gp.Equation(m, domain=[j, jj, i, ii, l])
+intersections[j, jj, i, ii, l].where[
+    common[j, jj, i, ii]
+] = (
+    gp.Sum(k.where[wlet[k, i, l]], w[j, k]) ==
+    gp.Sum(k.where[wlet[k, ii, l]], w[jj, k])
 )
 
 model = gp.Model(
