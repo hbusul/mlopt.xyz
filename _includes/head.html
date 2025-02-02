@@ -22,4 +22,8 @@ a.button {
 </style>
 
   {%- feed_meta -%}
+  {% if site.google_analytics and jekyll.environment == 'production' %}
+    {% include analytics.html %}
+  {% endif %}
+  {% include mj.html %}
 </head>
