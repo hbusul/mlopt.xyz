@@ -439,8 +439,9 @@ here: <a href="https://crossword-puzzle.streamlit.app/" class="button" target="_
 
 
 
-A word of caution, I directly loaded the word list from linux dictionary,
-it is not censored and demo license that comes with GAMSPy have size limitations.
+A word of caution, I loaded the word list from linux dictionary, and removed
+some words but still there are about 43k words which I cannot check all of
+them for suitability. Also demo license that comes with GAMSPy have size limitations.
 However, if you wish to change anything about it or use it with your license
 locally, you can find the codebase at
 [hbusul/crossword-puzzle](https://github.com/hbusul/crossword-puzzle).
