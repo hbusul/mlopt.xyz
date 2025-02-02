@@ -31,6 +31,8 @@ github_username:  hbusul
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+
 
 google_analytics: G-E44BDNHE2B
 

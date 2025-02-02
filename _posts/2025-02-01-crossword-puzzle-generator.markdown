@@ -1,8 +1,12 @@
 ---
+author: H. Burak Usul
 layout: post
 title:  "Crossword Puzzle Generator"
 date:   2025-02-01 18:41:00 +0100
 categories: optimization game
+tags: crossword puzzle mip optimization
+description: "A detailed guide on building a crossword puzzle generator using Streamlit and GAMSPy"
+image: "/assets/images/cw_thumbnail.png"
 ---
 
 While playing a mobile game a couple of months ago, an advertisement caught my
