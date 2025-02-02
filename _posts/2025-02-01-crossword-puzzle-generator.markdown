@@ -431,7 +431,10 @@ get the solution and basically print it out in a new section like:
 
 I know this has been a bit of a long post, but I hope that it caught your
 interest. If you want to play with the application a bit, you can find it
-here: [Streamlit App](https://crossword-puzzle.streamlit.app/).
+here: <a href="https://crossword-puzzle.streamlit.app/" class="button" target="_blank">Run Streamlit App</a>.
+
+
+
 A word of caution, I directly loaded the word list from linux dictionary,
 it is not censored and demo license that comes with GAMSPy have size limitations.
 However, if you wish to change anything about it or use it with your license
