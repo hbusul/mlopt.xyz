@@ -22,6 +22,9 @@ I was immediately interested in representing this game as a mathematical
 optimization model. I spent probably an unhealthy amount of my weekend on it
 but here it goes.
 
+We will build the following streamlit app,
+<a href="https://crossword-puzzle.streamlit.app/" class="button" target="_blank">Run Streamlit App</a>.
+
 I'm interested in finding "a" solution rather than "the" solution. Let's start
 defining the problem. Given \\(K\\) many words, \\(LW_k\\) denotes the length of
 k-th word for \\(\\forall_k \\in [K]\\). For brevity, we will call a row or a
