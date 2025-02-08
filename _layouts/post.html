@@ -35,19 +35,20 @@ layout: default
     </ul>
 
     <h3>Leave a comment</h3>
+    <p>Your comment will be submitted for approval.</p>
     <form method="post" action="{{ site.staticman.endpoint }}{{ site.repository }}/{{ site.staticman.branch }}/comments">
       <input name="options[redirect]" type="hidden" value="https://mlopt.xyz{{ page.url }}">
       <fieldset>
         <label for="comment-form-name">Name</label>
-        <input type="text" name="fields[name]"/>
+        <input type="text" name="fields[name]" required/>
       </fieldset>
       <fieldset>
         <label for="comment-form-message">Comment</label>
-        <textarea type="text" rows="3" name="fields[message]"></textarea>
+        <textarea type="text" rows="3" name="fields[message]" required></textarea>
       </fieldset>
       <fieldset>
         <label for="comment-form-email">Email address</label>
-        <input type="email" name="fields[email]"/>
+        <input type="email" name="fields[email]" required/>
       </fieldset>
       <fieldset class="hidden" style="display: none;">
         <!-- used by Staticman to generate filenames for each comment -->
