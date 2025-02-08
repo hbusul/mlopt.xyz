@@ -18,6 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+staticman:
+  endpoint: "https://mlopt-comments-b63139808540.herokuapp.com/v3/entry/github/hbusul/"
+  branch: "master"
+
+repository: mlopt.xyz
+
 author: H. Burak Usul
 title: mlopt.xyz
 email: h(DOT)burak(DOT)usul@gmail.com

@@ -1,8 +1,9 @@
 comments:
   allowedFields: ["name", "email", "url", "message"]
+  allowedOrigins: ["mlopt.xyz"]
   branch: "master"
 
-  commitMessage: "Add Staticman data"
+  commitMessage: "New comment"
 
   filename: "entry{@timestamp}"
 

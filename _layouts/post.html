@@ -1,0 +1,65 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}</p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+
+  <section>
+    <h3 class="post-list-heading">Comments:</h3>
+    <ul class="post-list">
+        {% assign comments = site.data.comments[page.slug] | sort %}
+        {% for comment in comments %}
+          {% assign email = comment[1].email %}
+          {% assign name = comment[1].name %}
+          {% assign date = comment[1].date %}
+          {% assign message = comment[1].message %}
+          {% include comment.html index=forloop.index email=email name=name date=date message=message %}
+        {% endfor %}
+    </ul>
+
+    <h3>Leave a comment</h3>
+    <form method="post" action="{{ site.staticman.endpoint }}{{ site.repository }}/{{ site.staticman.branch }}/comments">
+      <input name="options[redirect]" type="hidden" value="https://mlopt.xyz{{ page.url }}">
+      <fieldset>
+        <label for="comment-form-name">Name</label>
+        <input type="text" name="fields[name]"/>
+      </fieldset>
+      <fieldset>
+        <label for="comment-form-message">Comment</label>
+        <textarea type="text" rows="3" name="fields[message]"></textarea>
+      </fieldset>
+      <fieldset>
+        <label for="comment-form-email">Email address</label>
+        <input type="email" name="fields[email]"/>
+      </fieldset>
+      <fieldset class="hidden" style="display: none;">
+        <!-- used by Staticman to generate filenames for each comment -->
+        <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+        <!-- honey pot used to filter out spam -->
+        <label for="comment-form-location">Not used. Leave blank if you are a human.</label>
+        <input type="text" name="fields[hidden]" autocomplete="off"/>
+      </fieldset>
+      <fieldset>
+        <button type="submit">Submit Comment</button>
+      </fieldset>
+    </form>
+    <!-- End new comment form -->
+  </section>
+</article>

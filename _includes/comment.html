@@ -1,0 +1,13 @@
+<li>
+    <div class="post-meta" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        {{ include.name }}
+    </div>
+    <div class="post-meta">
+        <time datetime="{{ include.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ include.date | date: "%B %d, %Y at %I:%M %p" }}
+        </time>
+    </div>
+    <div itemprop="text">
+        {{ include.message | markdownify }}
+    </div>
+</li>
