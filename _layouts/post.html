@@ -24,14 +24,17 @@ layout: default
   <section>
     <h3 class="post-list-heading">Comments:</h3>
     <ul class="post-list">
-        {% assign comments = site.data.comments[page.slug] | sort %}
-        {% for comment in comments %}
-          {% assign email = comment[1].email %}
-          {% assign name = comment[1].name %}
-          {% assign date = comment[1].date %}
-          {% assign message = comment[1].message %}
-          {% include comment.html index=forloop.index email=email name=name date=date message=message %}
-        {% endfor %}
+        {% assign comments = site.data.comments[page.slug] %}
+        {% if comments %}
+          {% assign comments = comments | sort %}
+          {% for comment in comments %}
+            {% assign email = comment[1].email %}
+            {% assign name = comment[1].name %}
+            {% assign date = comment[1].date %}
+            {% assign message = comment[1].message %}
+            {% include comment.html index=forloop.index email=email name=name date=date message=message %}
+          {% endfor %}
+        {% endif %}
     </ul>
 
     <h3>Leave a comment</h3>
